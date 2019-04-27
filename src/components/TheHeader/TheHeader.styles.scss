@@ -1,0 +1,152 @@
+.header {
+  background-color: white;
+  grid-area: head;
+  height: 6rem;
+
+  &__container {
+    width: $grid-width;
+    height: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, max-content) 1fr max-content;
+    grid-template-areas: "logo divider name . link";
+    font-family: Roboto;
+    color: $primary-color;
+  }
+}
+
+.logo {
+  grid-area: logo;
+  font-size: 5rem;
+  font-weight: 400;
+  align-self: center;
+}
+
+.divider {
+  grid-area: divider;
+  margin: 0 3rem;
+  width: 2px;
+  height: 50%;
+  background-color: $primary-color;
+  align-self: center;
+}
+
+.name {
+  grid-area: name;
+  font-size: 2.5rem;
+  font-weight: 400;
+  align-self: center;
+}
+
+.link {
+  grid-area: link;
+  font-size: 2rem;
+  font-weight: 400;
+  align-self: center;
+  cursor: pointer;
+  margin-left: 1rem;
+  position: relative;
+  transition: all .3s;
+  color: $primary-color-light;
+
+  &:before {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    align-self: center;
+    width: 1rem;
+    height: 1rem;
+    top: 50%;
+    border-top: 2px solid  $primary-color-light;
+    border-left: 2px solid  $primary-color-light;
+    backface-visibility: hidden;
+    transform: translate(-175%, -50%) rotate(-45deg) scale(1);
+    transition: all .3s;
+    border-radius: 15%;
+
+  }
+
+  &:hover {
+    color: $primary-color;
+
+    &:before {
+      border-top: 2px solid  $primary-color;
+      border-left: 2px solid  $primary-color;
+      width: 1.2rem;
+      height: 1.2rem;
+      transform: translate(-225%, -50%) rotate(-45deg);
+    }
+  }
+}
+
+@include resp(900px) {
+  .logo {
+    font-size: 3rem;
+  }
+
+  .name {
+    font-size: 2rem;
+  }
+
+  .link {
+    font-size: 1.6rem;
+  }
+}
+
+@include resp(700px) {
+  .header {
+    height: auto;
+    padding: .5rem 0;
+
+    &__container {
+      grid-template-columns: max-content 1fr max-content;
+      grid-template-rows: repeat(2, 1fr);
+      grid-template-areas:
+      "logo . link"
+      "name . link";
+      width: $grid-width-small-screens;
+    }
+  }
+
+  .logo {
+    font-size: 3rem;
+  }
+
+  .name {
+    font-size: 2rem;
+  }
+
+  .link {
+    font-size: 1.6rem;
+  }
+
+  .divider {
+    display: none;
+  }
+}
+
+
+@include resp(500px) {
+  .header {
+    height: auto;
+    padding: 1rem 3rem;
+
+    &__container {
+      grid-template-columns: max-content;
+      grid-template-rows: repeat(3, max-content);
+      grid-template-areas:
+      "logo"
+      "name"
+      "link";
+      width: 100%;
+    }
+  }
+
+  .link {
+    margin: 1rem 0 0 0;
+  }
+
+  .link:before {
+    display: none;
+  }
+}
